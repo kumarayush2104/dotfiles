@@ -29,6 +29,7 @@ offset-x = 0
 font-0 = Awesome fonts:style=Bold:pixelsize=11;2
 font-1 = Font Awesome 5 Free:style=Solid:pixelsize=11;2
 font-2 = Font Awesome 5 Brands:style:Bold:pixelsize=11;2
+font-999 = Font Awesome 5 Free:style=Solid:pixelsize=14;2
 modules-left = rofi bspwm
 modules-center = time
 modules-right = brightness alsa bluetooth network network1 battery
@@ -149,10 +150,10 @@ label-connected-foreground = ${colors.color8}
 type = internal/network
 interface = eno1
 interval = 3.0
-format-connected = ETHERNET
+format-connected = 
 label-connected-foreground = ${colors.color100}
 format-connected-foreground = #84a0c6
-
+format-connected-padding = 2 
 [module/alsa]
 type = internal/alsa
 
