@@ -1,0 +1,183 @@
+[colors]
+background = #000000
+background-alt = #2D323D
+foreground = ${xrdb:background}
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2} 
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color12}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color8 = ${xrdb:color8}
+
+[bar/mybar]
+override-redirect = false 
+wm-restack = bspwm
+bottom = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+fixed-center = true
+width = 100%
+height = 30
+radius = 0.0
+line-size = 0
+line-color = #f00
+offset-y = 0
+offset-x = 0
+
+font-0 = Awesome fonts:style=Bold:pixelsize=11;2
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=13;2
+font-2 = Font Awesome 5 Brands:style:Bold:pixelsize=16;5
+modules-left = rofi bspwm
+modules-center = 
+modules-right = brightness alsa bluetooth network network1 battery time
+
+[module/rofi]
+type = custom/text
+content = Start
+click-left = rofi -show drun -location 0 -xoffset -745 -yoffset 260
+click-right = rofi -show window -location 0 -xoffset -745 -yoffset 260
+enable-click = true
+content-foreground = #FFFFFF
+content-padding = 6
+
+[module/bspwm]
+type = internal/bspwm
+index-sort = true
+enable-click = true
+format = <label-state>
+;format-prefix = |
+format-prefix-padding = 8
+pin-workspaces = true
+
+label-empty-foreground = #FFFFFF
+label-focused-foreground = #FF6347
+label-focused-background = #000000 
+label-focused = %name%
+label-focused-padding = 2
+label-occupied = %name%
+label-occupied-padding = 2
+laebl-occupied-foreground = #84a0c6
+label-empty = %name%
+label-empty-padding = 2
+label-state-padding = 2
+[settings]
+label-focused-underline= ${colors.background}
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+screenchange-reload = true
+pseudo-transparency = false
+
+[module/spotify]
+type = custom/script
+exec = playerctl -p spotify metadata --format '{{artist}} - {{title}}'
+exec-if = "pgrep spotify"
+format-foreground = ${colors.color8}
+format-padding = 0
+format-prefix = MUSIC:
+format-prefix-padding = 1
+format-prefix-foreground = #84a0c6
+tail = false
+interval = 0
+
+[module/time]
+type = internal/date
+time = %H:%M
+format = <label>
+format-prefix =
+format-prefix-padding = 1
+format-foreground = #84a0c6
+format-padding = 2
+label = %time%
+label-foreground = #FFFFFF 
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 100%
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-charging-foreground = #FFFFFF   
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+animation-charging-framerate = 750
+
+ramp-capacity-foreground = #FFFFFF
+label-discharging-foreground = #FFFFFF
+label-full-foreground = #FFFFFF
+
+format-charging-foreground = #FFFFFF
+format-discharging-foreground = #FFFFFF
+format-full-foreground = #FFFFFF
+
+format-charging-padding = 2
+format-discharging-padding = 2
+format-full-padding = 2
+
+[module/network]
+type = internal/network
+interface = wlan0
+interval = 3.0
+unknown-as-up = true
+accumulate-stats = true
+
+format-connected =   <label-connected>
+label-connected = %essid%
+format-connected-padding = 2
+format-connected-foreground = #84a0c6
+label-connected-foreground = ${colors.color8}
+
+[module/network1]
+type = internal/network
+interface = enp0s3
+interval = 3.0
+format-connected = 
+format-connected-foreground = #FFFFFF
+format-connected-padding = 2
+[module/alsa]
+type = internal/alsa
+
+format-volume =   <label-volume>
+label-muted =  0%
+label-muted-foreground = ${colors.color1}
+label-muted-padding = 2
+label-volume-foreground = #FFFFFF
+format-volume-foreground = #FFFFFF
+format-volume-padding = 2
+
+
+
+[module/brightness]
+type = internal/xbacklight
+
+enable-scroll = true
+format =   <label>
+label-foreground = ${colors.color8}
+format-foreground = #84a0c6
+format-padding = 2
+
+
+[module/bluetooth]
+type = custom/script
+exec = /home/kumarayush2104/.config/polybar/scripts/bluetooth.sh
+interval = 0.1
+click-right = exec ~/.config/polybar/scripts/toggle_bluetooth.sh
+format-padding = 2
+format-foreground = ${colors.color8}
